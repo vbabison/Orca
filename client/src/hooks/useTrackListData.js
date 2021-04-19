@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import authHeader from "../services/auth-header";
-
 const useTrackListData = () => {
   const [state, setState] = useState({ trackListData: [] });
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/tracks/", { headers: authHeader() })
+      .get("http://localhost:5000/tracks/")
       .then((result) =>
         setState((prev) => ({ ...prev, trackListData: result.data }))
       )

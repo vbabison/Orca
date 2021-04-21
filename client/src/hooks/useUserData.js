@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useTrackListData = () => {
-  const [state, setState] = useState({ trackListData: [] });
+const useUserData = () => {
+  const [state, setState] = useState({ userData: [] });
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/tracks/")
+      .get(`/users`)
       .then((result) =>
-        setState((prev) => ({ ...prev, trackListData: result.data }))
+        setState((prev) => ({ ...prev, userData: result.data }))
       )
       .catch((err) => console.log("ERROR!", err));
   }, []);
@@ -19,4 +19,4 @@ const useTrackListData = () => {
   };
 };
 
-export default useTrackListData;
+export default useUserData;

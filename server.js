@@ -71,6 +71,33 @@ app.post('/register', function(req, res) {
       .catch((err) => res.json({success: false, data: err}));
 });
 
+app.post('/like', function(req, res) {
+
+  let errorCheck = Util.checkForErrors(req.body);
+  if(errorCheck.hasErrors){
+    console.log('There were errors...');
+    res.json(errorCheck.errors);
+    return;
+  }
+
+  // insert a liker
+  const email = req.body.email;
+  const trackid = req.body.trackid;
+  const queryParams = [email, trackid];console.log(trackid)
+  const queryString = `INSERT INTO likers (email, trackid) VALUES (`+email+`, `+trackid+`) RETURNING *`;
+  let likers = db.query(`select * from likers where 'email'=`+email+` and 'trackid'=`+trackid);
+  if(likers.length === 0) {
+    db.query(queryString, queryParams)
+        .then((result) => {
+          res.json({
+            success: true,
+            data: result.rows[0]
+          });
+        })
+        .catch((err) => res.json({success: false, data: err}));
+  }
+});
+
 let apiRoutes = express.Router();
 
 let login = function(req, res) {

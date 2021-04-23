@@ -38,6 +38,7 @@
     "react-scripts": "^4.0.3",
     "save": "^2.4.0",
     "sql-template-strings": "^2.2.2",
+    "styled-components": "^5.2.3",
     "tone": "^14.8.15",
     "web-audio-daw": "^4.11.0"
   }
